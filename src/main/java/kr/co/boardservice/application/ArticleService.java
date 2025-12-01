@@ -21,7 +21,7 @@ public class ArticleService {
         this.articleRepository = articleRepository;
         this.commentRepository = commentRepository;
     }
-
+    
     @Transactional
     public Article createArticle(Long authorId, String title, String content) {
         Article article = Article.createNew(title, content, authorId);

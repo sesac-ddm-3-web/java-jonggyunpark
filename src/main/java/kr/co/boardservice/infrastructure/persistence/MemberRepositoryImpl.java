@@ -20,6 +20,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     public Member save(Member member) {
         MemberJpaEntity entity = MemberJpaEntity.fromDomain(member);
         MemberJpaEntity saved = jpaRepository.save(entity);
+
         return saved.toDomain();
     }
 
@@ -30,7 +31,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     @Override
     public Optional<Member> findByUsername(String username) {
-        return jpaRepository.findByUsername(username).map(MemberJpaEntity::toDomain);
+        return jpaRepository.findByUsername(username).map(memberJpaEntity -> memberJpaEntity.toDomain());
     }
 
     @Override

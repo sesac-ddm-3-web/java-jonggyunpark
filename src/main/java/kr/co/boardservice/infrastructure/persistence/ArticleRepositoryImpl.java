@@ -21,6 +21,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     public Article save(Article article) {
         ArticleJpaEntity entity = ArticleJpaEntity.fromDomain(article);
         ArticleJpaEntity saved = jpaRepository.save(entity);
+
         return saved.toDomain();
     }
 
@@ -32,7 +33,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     @Override
     public List<Article> findAllArticlesByCreatedAtDesc() {
         return jpaRepository.findAllByOrderByCreatedAtDesc().stream()
-                .map(ArticleJpaEntity::toDomain)
+                .map(articleJpaEntity -> articleJpaEntity.toDomain())
                 .toList();
     }
 

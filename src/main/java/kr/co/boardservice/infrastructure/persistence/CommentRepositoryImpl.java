@@ -21,6 +21,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     public Comment save(Comment comment) {
         CommentJpaEntity entity = CommentJpaEntity.fromDomain(comment);
         CommentJpaEntity saved = jpaRepository.save(entity);
+
         return saved.toDomain();
     }
 
@@ -32,7 +33,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public List<Comment> findByArticleIdOrderByCreatedAtAsc(Long articleId) {
         return jpaRepository.findByArticleIdOrderByCreatedAtAsc(articleId).stream()
-                .map(CommentJpaEntity::toDomain)
+                .map(commentJpaEntity -> commentJpaEntity.toDomain())
                 .toList();
     }
 
